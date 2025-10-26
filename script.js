@@ -25,48 +25,21 @@ function type() {
 }
 type();
 
-
-// Ambil data projek
+// Ambil data projek dari REST API
 fetch("/api/server/projek")
   .then(res => res.json())
   .then(data => {
-    const projekSection = document.createElement("section");
-    projekSection.id = "projek";
-    projekSection.innerHTML = `
-      <h2 class="section-title">Projek</h2>
-      <div class="edu-container">
-        ${data.map(p => `
-          <div class="edu-box">
-            <h3>${p.nama}</h3>
-            <p>${p.deskripsi}</p>
-          </div>`).join("")}
-      </div>`;
-    document.body.appendChild(projekSection);
+    console.log("Data projek:", data);
   })
-  .catch(err => console.error("Gagal ambil data projek:", err));
+  .catch(err => console.error("Gagal ambil projek:", err));
 
-// Kirim form kontak
-document.getElementById("kontakForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const nama = document.getElementById("nama").value;
-  const email = document.getElementById("email").value;
-  const pesan = document.getElementById("pesan").value;
-  const status = document.getElementById("status");
-
-  try {
-    const res = await fetch("/api/server/kontak", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nama, email, pesan })
-    });
-    const result = await res.json();
-    status.textContent = result.status;
-    status.style.color = "green";
-    e.target.reset();
-  } catch (err) {
-    status.textContent = "Gagal mengirim pesan!";
-    status.style.color = "red";
-  }
-});
-
-
+// Kirim pesan ke API
+async function kirimPesan(nama, email, pesan) {
+  const res = await fetch("/api/server/kontak", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ nama, email, pesan })
+  });
+  const hasil = await res.json();
+  console.log(hasil.status);
+}
