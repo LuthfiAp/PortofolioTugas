@@ -71,18 +71,34 @@
   </div>
 </section>
 
- <!-- Kontak -->
-  <section id="kontak" class="kontak">
-    <h2 class="section-title">Kirim Pesan Untuk Kerjasama</h2>
-    <form id="kontakForm">
-      <input type="text" id="nama" placeholder="Nama" required />
-      <input type="email" id="email" placeholder="Email" required />
-      <textarea id="pesan" placeholder="Pesan..." required></textarea>
-      <button type="submit">Kirim</button>
-    </form>
-    <p id="status"></p>
-  </section>
 
+  <form id="contactForm">
+    <input type="text" id="name" placeholder="Nama" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <textarea id="message" placeholder="Pesan" required></textarea>
+    <button type="submit">Kirim</button>
+  </form>
+
+  <script>
+    document.getElementById("contactForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+      };
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      alert(result.message);
+    });
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
@@ -91,4 +107,5 @@
   <script src="script.js"></script>
 </body>
 </html>
+
 
