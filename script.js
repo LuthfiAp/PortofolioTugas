@@ -26,9 +26,7 @@ function type() {
 type();
 
 
-// ===============================
-// Ambil data projek dari REST API
-// ===============================
+// Ambil data projek
 fetch("/api/server/projek")
   .then(res => res.json())
   .then(data => {
@@ -47,10 +45,7 @@ fetch("/api/server/projek")
   })
   .catch(err => console.error("Gagal ambil data projek:", err));
 
-
-// ===============================
-// Kirim form kontak ke REST API
-// ===============================
+// Kirim form kontak
 document.getElementById("kontakForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   const nama = document.getElementById("nama").value;
