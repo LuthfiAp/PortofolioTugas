@@ -1,4 +1,4 @@
-// Efek mengetik (punyamu yang lama)
+// Efek mengetik
 const texts = ["Programmer.", "UI/UX Designer.", "Graphic Designer."];
 let count = 0, index = 0, isDeleting = false;
 const speed = 100, delSpeed = 60, wait = 1500;
@@ -23,8 +23,8 @@ function type() {
 }
 type();
 
-// Ambil data proyek dari REST API
-fetch("http://localhost:3000/api/projek")
+// Ambil data projek dari REST API (otomatis sesuai domain Vercel)
+fetch("/api/projek")
   .then(res => res.json())
   .then(data => {
     const projekSection = document.createElement("section");
@@ -51,7 +51,7 @@ document.getElementById("kontakForm").addEventListener("submit", async (e) => {
   const status = document.getElementById("status");
 
   try {
-    const res = await fetch("http://localhost:3000/api/kontak", {
+    const res = await fetch("/api/kontak", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nama, email, pesan })
