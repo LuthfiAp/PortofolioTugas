@@ -1,4 +1,3 @@
-// api/server.js
 const express = require("express");
 const cors = require("cors");
 const app = express();
@@ -13,13 +12,12 @@ const projek = [
 ];
 
 // Endpoint REST API
-app.get("/api/projek", (req, res) => res.json(projek));
+app.get("/projek", (req, res) => res.json(projek));
 
-app.post("/api/kontak", (req, res) => {
+app.post("/kontak", (req, res) => {
   const { nama, email, pesan } = req.body;
   console.log(`📩 Pesan dari ${nama} (${email}): ${pesan}`);
   res.json({ status: "Pesan kamu sudah diterima!" });
 });
 
-// Export untuk Vercel
 module.exports = app;
