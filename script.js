@@ -42,7 +42,31 @@ fetch("/api/projek")
   })
   .catch(err => console.error("Gagal ambil data projek:", err));
 
+// ===============================
+// Ambil data projek dari REST API
+// ===============================
+fetch("/api/projek")
+  .then(res => res.json())
+  .then(data => {
+    const projekSection = document.createElement("section");
+    projekSection.id = "projek";
+    projekSection.innerHTML = `
+      <h2 class="section-title">Projek</h2>
+      <div class="edu-container">
+        ${data.map(p => `
+          <div class="edu-box">
+            <h3>${p.nama}</h3>
+            <p>${p.deskripsi}</p>
+          </div>`).join("")}
+      </div>`;
+    document.body.appendChild(projekSection);
+  })
+  .catch(err => console.error("Gagal ambil data projek:", err));
+
+
+// ===============================
 // Kirim form kontak ke REST API
+// ===============================
 document.getElementById("kontakForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   const nama = document.getElementById("nama").value;
