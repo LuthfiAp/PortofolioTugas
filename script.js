@@ -24,22 +24,3 @@ function type() {
   }
 }
 type();
-
-// Ambil data projek dari REST API
-fetch("/api/server/projek")
-  .then(res => res.json())
-  .then(data => {
-    console.log("Data projek:", data);
-  })
-  .catch(err => console.error("Gagal ambil projek:", err));
-
-// Kirim pesan ke API
-async function kirimPesan(nama, email, pesan) {
-  const res = await fetch("/api/server/kontak", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ nama, email, pesan })
-  });
-  const hasil = await res.json();
-  console.log(hasil.status);
-}
