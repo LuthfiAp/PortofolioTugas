@@ -1,4 +1,6 @@
-// Efek mengetik
+// ===============================
+// Bagian efek mengetik
+// ===============================
 const texts = ["Programmer.", "UI/UX Designer.", "Graphic Designer."];
 let count = 0, index = 0, isDeleting = false;
 const speed = 100, delSpeed = 60, wait = 1500;
@@ -23,29 +25,11 @@ function type() {
 }
 type();
 
-// Ambil data projek dari REST API (otomatis sesuai domain Vercel)
-fetch("/api/projek")
-  .then(res => res.json())
-  .then(data => {
-    const projekSection = document.createElement("section");
-    projekSection.id = "projek";
-    projekSection.innerHTML = `
-      <h2 class="section-title">Projek</h2>
-      <div class="edu-container">
-        ${data.map(p => `
-          <div class="edu-box">
-            <h3>${p.nama}</h3>
-            <p>${p.deskripsi}</p>
-          </div>`).join("")}
-      </div>`;
-    document.body.appendChild(projekSection);
-  })
-  .catch(err => console.error("Gagal ambil data projek:", err));
 
 // ===============================
 // Ambil data projek dari REST API
 // ===============================
-fetch("/api/projek")
+fetch("/api/server/projek")
   .then(res => res.json())
   .then(data => {
     const projekSection = document.createElement("section");
@@ -75,7 +59,7 @@ document.getElementById("kontakForm").addEventListener("submit", async (e) => {
   const status = document.getElementById("status");
 
   try {
-    const res = await fetch("/api/kontak", {
+    const res = await fetch("/api/server/kontak", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nama, email, pesan })
