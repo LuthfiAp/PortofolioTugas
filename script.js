@@ -27,7 +27,7 @@ type();
 
 
 // Ambil data projek
-fetch("/api/server")
+fetch("/api/server/projek")
   .then(res => res.json())
   .then(data => {
     const projekSection = document.createElement("section");
@@ -54,7 +54,7 @@ document.getElementById("kontakForm").addEventListener("submit", async (e) => {
   const status = document.getElementById("status");
 
   try {
-    const res = await fetch("/api/server", {
+    const res = await fetch("/api/server/kontak", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nama, email, pesan })
@@ -68,4 +68,5 @@ document.getElementById("kontakForm").addEventListener("submit", async (e) => {
     status.style.color = "red";
   }
 });
+
 
